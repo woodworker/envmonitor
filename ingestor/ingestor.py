@@ -14,7 +14,7 @@ def on_message(client, userdata, msg):
     type = data["type"]
     value = data["value"]
     node = data["node"]
-    # 'cpu_load_short,host=server01,region=us-west value=0.64 1434055562000000000'
+    # adding so many zeros after 3rd parameter because influxdb needs nanosecond timestamps
     send = '{0},node={1} value={2} {3}000000000'.format(type, node, value, timestamp)
     requests.post('http://localhost:8086/write?db=environment', data = send)
     print send
